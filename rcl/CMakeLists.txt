@@ -46,7 +46,6 @@ set(${PROJECT_NAME}_sources
   src/rcl/node.c
   src/rcl/publisher.c
   src/rcl/remap.c
-  src/rcl/rmw_implementation_identifier_check.c
   src/rcl/service.c
   src/rcl/subscription.c
   src/rcl/time.c
@@ -54,6 +53,10 @@ set(${PROJECT_NAME}_sources
   src/rcl/validate_topic_name.c
   src/rcl/wait.c
 )
+
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+  list(APPEND ${PROJECT_NAME}_source src/rcl/rmw_implementation_identifier_check.c)
+endif()
 
 add_library(${PROJECT_NAME} ${${PROJECT_NAME}_sources})
 # specific order: dependents before dependencies
